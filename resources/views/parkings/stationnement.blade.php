@@ -39,6 +39,7 @@
                                         <th>Duree estime</th>
                                         <th>Duree réel</th>
                                         <th>Date d'arrivé</th>
+                                        <th>Date depart</th>
                                         <th>Amende</th>
                                         <th>Montant total</th>
                                         <th style=""></th>
@@ -50,12 +51,13 @@
                                             <td>{{ $st->voiture->numero }}</td>
                                             <td>{{ $st->parking->numero }}</td>
                                             <td>{{ $st->duree_estime }} heure(s)</td>
-                                            <td>{{ $st->duree_reel }} heure(s)</td>
+                                            <td>{{ $st->duree_reel? $st->duree_reel. ' heure(s)' : '' }}</td>
                                             <td>{{ $st->dateheure }}</td>
+                                            <td>{{ $st->datesortie }}</td>
                                             <td>{{ $st->amende }} Ar</td>
                                             <td>{{ $st->amende+$st->montant }} Ar</td>
                                             <td>
-                                                @if($st->etat == 0)
+                                                @if($st->etat->code == 10)
 {{--                                                    <a class="btn btn-sm btn-warning" href="{{ route('sortie', [$st->id]) }}" style="margin-right: 10px;">--}}
 {{--                                                        <i class="fas fa-eye"></i>--}}
 {{--                                                        Enlever--}}
@@ -65,7 +67,7 @@
                                                         Enlever
                                                     </a >
 
-                                                @elseif($st->etat == 10)
+                                                @elseif($st->etat->code == 0)
                                                     <a class="btn btn-sm btn-success" href="{{ route('facturer', [$st->id]) }}" style="margin-right: 10px;">
                                                         <i class="fas fa-eye"></i>
                                                         Facturer
@@ -78,6 +80,13 @@
                                     @endforeach
                                     </tbody>
                                 </table>
+                                @error('error')
+                                    <div class="small-box bg-danger">
+                                        <div class="inner">
+                                            <h4>{{ $message }}</h4>
+                                        </div>
+                                    </div>
+                                @enderror
                             </div>
                         </div>
                         <!-- /.card -->
@@ -99,21 +108,21 @@
             <span id="closeBtn" class="bold-label" onclick="closeFormPopup()">X</span>
             <label  class="bold-label" >Sortie</label>
             <form id="myForm" method="post" action="{{ route('sortie') }}">
+                @csrf
                 <div class="form-group col-12">
                     <label for="date">Date</label>
                     <input type="datetime-local" class="form-control" id="date" name="date" required>
                     <div id="error-message" style="color: red;"></div>
                 </div>
-
-                <input type="button" class="btn btn-success" value="Valider" onclick="submitForm()">
+                <input type="submit" class="btn btn-success" value="Valider">
             </form>
         </div>
     </div>
-    <script async>
+    <script>
         function openFormPopup(id) {
            // console.log(idhoe);
             var input = document.createElement('input');
-            input.type = 'text';
+            input.type = 'hidden';
             input.name = 'station_id';
             input.value = id;
             var myForm = document.getElementById('myForm');

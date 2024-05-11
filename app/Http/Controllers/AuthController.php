@@ -38,7 +38,7 @@ class AuthController extends Controller
             $user = Auth::user();
             Session::put('user_id', $user->id);
             Session::put('profil_id', $user->profil->id);
-            return redirect()->intended('parkings');
+            return redirect()->intended('image');
         }
         // L'authentification a échoué, redirection avec les erreurs de validation
         return back()->withErrors([

@@ -18,7 +18,8 @@ class Station extends Model
         'parking_id',
         'voiture_id',
         'duree_estime',
-        'dateheure'
+        'dateheure',
+        'etat_id'
     ];
     public static function getId(){
         return DB::select("SELECT gen_station_id()")[0]->gen_station_id;
@@ -29,8 +30,12 @@ class Station extends Model
     public function parking(){
         return $this->belongsTo(parking::class,'parking_id');
     }
+    public function etat(){
+        return $this->belongsTo(etat::class,'etat_id');
+    }
     public function getStationnement(){
         $result = DB::select('select * from stationnement');
         return $result;
     }
+
 }

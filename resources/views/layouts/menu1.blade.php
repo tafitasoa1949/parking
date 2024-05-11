@@ -175,14 +175,6 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ route('personnes.index') }}" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Personnes
-                                </p>
-                            </a>
-                        </li>
                     @endif
                     @if(Session::get('profil_id') == 2)
                         <li class="nav-item">
@@ -288,10 +280,3 @@
 <script src="{{ asset('plugins/dropzone/min/dropzone.min.js') }}"></script>
 </body>
 </html>
-
-<li class="nav-item">
-    <a href="{{ route('personnes.index') }}" class="nav-link {{ Request::is('personnes*') ? 'active' : '' }}">
-        <i class="nav-icon fas fa-home"></i>
-        <p>Personnes</p>
-    </a>
-</li>

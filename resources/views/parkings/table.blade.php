@@ -19,33 +19,24 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($parkings as $parking)
-            <tr>
-                <td>{{ $parking->numero }}</td>
-                <td>{{ $parking->longueur }} metres</td>
-                <td>{{ $parking->largeur }} metres</td>
-                @if(Session::get('profil_id') == 2)
-                <td style="text-align: center"><a class="btn btn-info btn-sm" href="{{ route('enstation', [$parking->id]) }}" style="margin-right: 10px;">Stationner</a></td>
-                @endif
-                <td>
-                    {!! Form::open(['route' => ['parkings.destroy', $parking->id], 'method' => 'delete'])!!}
-                    <div class='btn-group'>
-                        <a class="btn btn-success btn-sm" href="{{ route('parkings.show', [$parking->id]) }}" style="margin-right: 10px;">
-                            <i class="fas fa-eye"></i>
-                            View
-                        </a>
-                        @if(Session::get('profil_id') == 1)
-                        <a class="btn btn-warning btn-sm" href="{{ route('parkings.edit', [$parking->id]) }}" style="margin-right: 10px;">
-                            <i class="far fa-edit"></i>
-                            Edit
-                        </a>
-                        {!! Form::button('<i class="far fa-trash-alt"></i> Delete', ['type' => 'submit', 'class' => 'btn btn-danger btn-sm', 'onclick' => "return confirm('Are you sure?')"])!!}
+                @foreach($parkings as $parking)
+                    <tr>
+                        <td>{{ $parking->numero }}</td>
+                        <td>{{ $parking->longueur }} metres</td>
+                        <td>{{ $parking->largeur }} metres</td>
+                        @if(Session::get('profil_id') == 2)
+                            <td style="text-align: center">
+                                <a class="btn btn-info btn-sm" href="{{ route('enstation', [$parking->id]) }}" style="margin-right: 10px;">Stationner</a>
+                                <!-- Popup pour les détails du parking -->
+                                <div id="popup-{{ $parking->id }}" class="popup-details" style="display:none;">
+                                    <!-- Contenu du popup ici -->
+                                    <p>Détails du parking {{ $parking->numero }}</p>
+                                </div>
+                            </td>
                         @endif
-                    </div>
-                    {!! Form::close()!!}
-                </td>
-            </tr>
-        @endforeach
+                        <!-- Le reste de votre code... -->
+                    </tr>
+                @endforeach
         </tbody>
     </table>
 </div>

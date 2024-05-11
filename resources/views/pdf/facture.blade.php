@@ -20,7 +20,7 @@
     <h2>N° : {{ $stationnement->id }}</h2>
 </div>
 <div class="content">
-    <h3>Mr/Mme : {{ $stationnement->voiture->user->prenoms }} {{ $stationnement->voiture->user->nom }}</h3>
+    <h3>Mr/Mme : {{ $stationnement->user->prenoms }} {{ $stationnement->user->nom }}</h3>
     <h3>N° voiture : {{ $stationnement->voiture->numero }}</h3>
     <h3>Parking : {{ $stationnement->parking->numero }}</h3>
     <h3>Durée : {{ $stationnement->duree_reel }} heure(s)</h3>

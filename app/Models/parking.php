@@ -32,6 +32,10 @@ class parking extends Model
     public static function getId(){
         return DB::select("SELECT gen_parking_id()")[0]->gen_parking_id;
     }
-
-
+    public function station(){
+        return $this->hasMany(Station::class,'parking_id');
+    }
+    public static function stat_etat_parking(){
+        return DB::select("select * from stat_etat_parking");
+    }
 }

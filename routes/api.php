@@ -30,3 +30,12 @@ Route::resource('marques', App\Http\Controllers\API\marqueAPIController::class)
 
 Route::resource('voitures', App\Http\Controllers\API\voitureAPIController::class)
     ->except(['create', 'edit']);
+
+Route::resource('etats', App\Http\Controllers\API\etatAPIController::class)
+    ->except(['create', 'edit']);
+
+Route::resource('cruds', App\Http\Controllers\API\CrudAPIController::class)
+    ->except(['create', 'edit']);
+
+Route::resource('personnes', App\Http\Controllers\API\PersonneAPIController::class)
+    ->except(['create', 'edit']);

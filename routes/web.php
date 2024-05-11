@@ -22,6 +22,7 @@ Route::post('/inscription', [AuthController::class,'inscription'])->name('inscri
 
 Route::middleware('auth')->group(function (){
     Route::resource('parkings', App\Http\Controllers\parkingController::class);
+    Route::get('image', [App\Http\Controllers\ParkingController::class, 'image'])->name('image');
     Route::get('enstation/{id}', [App\Http\Controllers\ParkingController::class, 'enstation'])->name('enstation');
     Route::post('stationner', [App\Http\Controllers\ParkingController::class, 'stationner'])->name('stationner');
     Route::get('stationnement', [App\Http\Controllers\ParkingController::class, 'stationnement'])->name('stationnement');
@@ -33,7 +34,19 @@ Route::middleware('auth')->group(function (){
     Route::resource('marques', App\Http\Controllers\marqueController::class);
 
     Route::resource('voitures', App\Http\Controllers\voitureController::class);
+    Route::get('depot', [App\Http\Controllers\CompteController::class, 'depot'])->name('depot');
+    Route::get('depot.ajouter', [App\Http\Controllers\CompteController::class, 'ajouter'])->name('depot.ajouter');
+    Route::post('depot_argent', [App\Http\Controllers\CompteController::class, 'depot_argent'])->name('depot_argent');
+    Route::get('depot.tous', [App\Http\Controllers\CompteController::class, 'listeDepot'])->name('depot.tous');
+    Route::get('depot.valider/{id}', [App\Http\Controllers\CompteController::class, 'validation'])->name('depot.valider');
+    Route::resource('etats', App\Http\Controllers\etatController::class);
+    Route::resource('cruds', App\Http\Controllers\CrudController::class);
+    Route::get('front', [App\Http\Controllers\CrudController::class, 'front'])->name('front');
+    Route::resource('personnes', App\Http\Controllers\PersonneController::class);
 });
+
+
+
 
 
 
